@@ -300,6 +300,6 @@ def libentry():
     """
 
     def decorator(fn):
-        return LibEntry(fn)
+        return fn
 
     return decorator
