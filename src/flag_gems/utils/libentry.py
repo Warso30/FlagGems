@@ -136,23 +136,18 @@ def libtuner(
     Decorator for triton library autotuner.
     """
 
-    def decorator(fn):
-        return LibTuner(
-            fn,
-            fn.arg_names,
-            configs,
-            key,
-            reset_to_zero,
-            restore_value,
-            pre_hook=pre_hook,
-            post_hook=post_hook,
-            prune_configs_by=prune_configs_by,
-            warmup=warmup,
-            rep=rep,
-            use_cuda_graph=use_cuda_graph,
-        )
-
-    return decorator
+    return triton.autotune(
+        configs,
+        key,
+        prune_configs_by,
+        reset_to_zero,
+        restore_value,
+        pre_hook,
+        post_hook,
+        warmup,
+        rep,
+        use_cuda_graph,
+    )
 
 
 class LibEntry(triton.KernelInterface):
